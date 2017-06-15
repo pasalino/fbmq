@@ -1,52 +1,14 @@
-# FBMQ (Facebook Messenger Platform Python Library)
-[![PyPI](https://img.shields.io/pypi/v/fbmq.svg?v=1&maxAge=3601)](https://pypi.python.org/pypi/fbmq)
-[![Build Status](https://travis-ci.org/conbus/fbmq.svg?branch=master&v=1)](https://travis-ci.org/conbus/fbmq)
-[![Coverage Status](https://coveralls.io/repos/github/conbus/fbmq/badge.svg?branch=master)](https://coveralls.io/github/conbus/fbmq?branch=master)
-[![PyPI](https://img.shields.io/pypi/l/fbmq.svg?v=1&maxAge=2592000)](https://pypi.python.org/pypi/fbmq)
+# FBMQ Async (Facebook Messenger Platform Python Library)
 
-
-## ASYNC
+Forked from [fbmq](https://github.com/conbus/fbmq)
 Unlike the original version this have a async class PageAsync.
 For use this version use Python 3.6.1
 
 A Python Library For Using The Facebook Messenger Platform API (Python Facebook Chat & Chatbot Library)
 Facebook messenger platform api full features are supported
-## Table of Contents
 
-* [Install](#install)
-* [Handle webhook](#handle-webhook)
-  * [usage (with flask)](#usage-with-flask)
-  * [handlers](#handlers)
-* [Send a message](#send-a-message)
-  * [basic](#basic)
-    * [text](#text)
-    * [image](#image) / [audio](#audio) / [video](#video) / [file](#file)
-    * [quick reply](#quick-reply)
-      * [quick reply callback](#quick-reply-callback)
-    * [typing on/off](#typing-onoff)
-  * [templates](#templates)
-    * [button](#template--button)
-      * [button callback](#button-callback)
-    * [generic](#template--generic)
-    * [receipt](#template--receipt)
-  * [options](#options)
-    * [notification type](#notification-type)
-    * [callback](#callback) 
-* [Thread settings](#thread-settings)
-  * [greeting text](#greeting-text)
-  * [get started button](#get-started-button)
-  * [persistent menu](#persistent-menu)
-* [Fetch user/page profile](#fetch-userpage-profile)
-* [Example](#example)
-
-
-# Install
-```
-pip install fbmq
-```
-
-# Handle webhook
-how to handle messages from user to facebook page
+### Usage (async mode)
+Use class PageAsync for async
 
 ### Usage (with flask)
 ```python
