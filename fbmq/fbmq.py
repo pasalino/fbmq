@@ -584,7 +584,7 @@ class PageAsync(object):
                                   headers={'Content-type': 'application/json'})
 
             if r.status != requests.codes.ok:
-                print('Invalid state received from facebook' + str(r.status) + ' ' + r.text())
+                print('Invalid state received from facebook' + str(r.status) + ' ' + " -- ".join(r.text()))
                 return
 
             if callback is not None:
