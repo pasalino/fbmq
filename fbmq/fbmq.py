@@ -462,9 +462,8 @@ class PageAsync(object):
         self._after_send = options.pop('after_send', None)
         self._page_id = None
         self._page_name = None
-        if not loop:
-            raise ValueError("loop is mandatory")
-        self._loop = loop
+        if loop!=None:
+            self._loop = loop
 
         # webhook_handlers contains optin, message, echo, delivery, postback, read, account_linking.
         # these are only set by decorators
