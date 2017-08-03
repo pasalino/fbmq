@@ -566,15 +566,17 @@ class PageAsync(object):
     async def get_user_profile(self, fb_user_id):
         tcpconnector = aiohttp.TCPConnector(family=socket.AF_INET, verify_ssl=False)
         async with aiohttp.ClientSession(loop=self._loop, connector=tcpconnector) as client:
-            r = await client.get("https://graph.facebook.com/v2.6/%s" % fb_user_id,
+            r = await client.get("https://graph.facebook.com/v2.6/%s?access_token=%s" % (fb_user_id, self.page_access_token, ),
                                  data=json.dumps({"access_token": self.page_access_token}),
                                  headers={'Content-type': 'application/json'})
 
+            text = await r.text()
+            
             if r.status != requests.codes.ok:
-                print(r.text())
+                print(text)
                 return
 
-        return json.loads(r.text())
+        return json.loads(text)
 
     async def _send(self, payload, callback=None):
         tcpconnector = aiohttp.TCPConnector(family=socket.AF_INET, verify_ssl=False)
