@@ -236,16 +236,18 @@ class Page(object):
         self._page_id = data['id']
         self._page_name = data['name']
 
-    def get_user_profile(self, fb_user_id):
-        r = requests.get("https://graph.facebook.com/v2.6/%s" % fb_user_id,
-                         params={"access_token": self.page_access_token},
-                         headers={'Content-type': 'application/json'})
+    async def get_user_profile(self, fb_user_id):
+        tcpconnector = aiohttp.TCPConnector(family=socket.AF_INET, verify_ssl=False)
+        async with aiohttp.ClientSession(loop=self._loop, connector=tcpconnector) as client:
+            r = await client.get("https://graph.facebook.com/v2.6/%s?access_token=%s" % (fb_user_id, self.page_access_token,),
+                                 data=json.dumps({"access_token": self.page_access_token}),
+                                 headers={'Content-type': 'application/json'})
+            text = await r.text()
+            if r.status != requests.codes.ok:
+                print(f'Error in status {text}')
+                return
 
-        if r.status_code != requests.codes.ok:
-            print(r.text)
-            return
-
-        return json.loads(r.text)
+        return json.loads(text)
 
     def _send(self, payload, callback=None):
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
