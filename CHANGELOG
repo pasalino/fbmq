@@ -1,47 +1,7 @@
-FBMQ Changelog
+FBMQ Async Changelog
 ==============
 
-Latest
-------
-
-2.0.3
------
-* Fixed Message encoding error on python2.x
-* Fixed issue when send in text, both text and attachment got check up
-
-2.0.2
------
-* Fixed Message encoding error by @jdcaballerov
- 
-2.0.1
-_____
-
-* Feature : page.send method return Response
-
-2.0.0
+0.0.1
 -----
 
-* Feature : All of page handlers have parameter Event instead of a dict.
-* Feature : Support a thread setting
-* Deprecated : remove callback_postback, callback_quick_reply
-* Feature : Add a decorator - page.callback(['payload'], types=['QUICK_REPLY', 'POSTBACK'])
-* Feature : Add a page method, get_user_profile(fb_user_id), to get facebook user profile
-
-1.7.0
------
-
-* Fix, trigger message_handler, postback_handler even if custom callbacks are used
-* Feature : Add a callback function in page.send
-* Feature : Add a page option 'after_send' (support decorator @page.after_send)
-* Feature : Support notification type (e.g page.send(notification_type=NotificationType.SILENT_PUSH))
-
-1.6.0
------
-
-* Support regex in button/quickreply callbacks.
-
-1.5.4
------
-
-* Support decorators (message handlers and button/quickreply callbacks)
-* Deprecated fbmq.handler_webhook method (must use page.handler_webhoo)
+* Support for async await

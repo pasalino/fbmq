@@ -21,15 +21,15 @@ with open('fbmq/__init__.py', 'r') as f:
     else:
         raise RuntimeError("No version number found!")
 
-setup(name='fbmq',
+setup(name='fbmq-async',
       version=VERSION,
-      description='A Python Library For Using The Facebook Messenger Platform API',
+      description='A Python Library For Using The Facebook Messenger Platform API with async',
       long_description=long_description,
-      url='https://github.com/conbus/fbmq',
-      author='kimwz',
-      author_email='kimwz.kr@gmail.com',
+      url='https://github.com/pasalino/fbmq-async',
+      author='Pasqualino de Simone',
+      author_email='pasalino@gmail.com',
       license='MIT',
-      packages=['fbmq'],
+      packages=['fbmq-async'],
       install_requires=['requests>=2.0', 'flask', 'aiohttp>=2.1'],
-      keywords='Facebook Messenger Platform Chatbot',
+      keywords='Facebook Messenger Platform Chatbot Async',
       )
