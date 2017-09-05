@@ -12,7 +12,7 @@ except:
 
 # Get the version
 version_regex = r'__version__ = ["\']([^"\']*)["\']'
-with open('fbmq/__init__.py', 'r') as f:
+with open('fbmqasync/__init__.py', 'r') as f:
     text = f.read()
     match = re.search(version_regex, text)
 
@@ -21,15 +21,15 @@ with open('fbmq/__init__.py', 'r') as f:
     else:
         raise RuntimeError("No version number found!")
 
-setup(name='fbmq-async',
+setup(name='fbmqasync',
       version=VERSION,
       description='A Python Library For Using The Facebook Messenger Platform API with async',
       long_description=long_description,
-      url='https://github.com/pasalino/fbmq-async',
+      url='https://github.com/pasalino/fbmq_async',
       author='Pasqualino de Simone',
       author_email='pasalino@gmail.com',
       license='MIT',
-      packages=['fbmq-async'],
+      packages=['fbmqasync'],
       install_requires=['requests>=2.0', 'flask', 'aiohttp>=2.1'],
       keywords='Facebook Messenger Platform Chatbot Async',
       )

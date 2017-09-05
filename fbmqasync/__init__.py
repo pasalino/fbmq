@@ -1,6 +1,6 @@
 __version__ = '2.0.3'
 
-from .fbmq import *
+from .fbmqasync import *
 from . import attachment as Attachment
 from . import template as Template
-from .fbmq import PageAsync
+from .fbmqasync import PageAsync

@@ -1,7 +1,7 @@
 import unittest
 import json
 import mock
-from fbmq.fbmq import Page
+from fbmq import Page
 from fbmq import payload as Payload
 from fbmq import attachment as Attachment
 from fbmq import template as Template
