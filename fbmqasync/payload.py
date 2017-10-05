@@ -66,7 +66,9 @@ class Message(object):
 
 
 class QuickReply(object):
-    def __init__(self, title, payload):
-        self.title = title
-        self.payload = payload
-        self.content_type = 'text'
+    def __init__(self, title, payload, content_type='text'):
+        if title:
+            self.title = title
+        if payload:
+            self.payload = payload
+        self.content_type = content_type
