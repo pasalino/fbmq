@@ -1,4 +1,4 @@
-__version__ = '2.0.3'
+__version__ = '2.0.6'
 
 from .fbmqasync import *
 from . import attachment as Attachment
