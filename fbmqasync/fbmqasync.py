@@ -238,10 +238,11 @@ class Page(object):
 
     async def get_user_profile(self, fb_user_id):
         tcpconnector = aiohttp.TCPConnector(family=socket.AF_INET, verify_ssl=False)
-        async with aiohttp.ClientSession(loop=self._loop, connector=tcpconnector) as client:
-            r = await client.get("https://graph.facebook.com/v2.6/%s?access_token=%s" % (fb_user_id, self.page_access_token,),
-                                 data=json.dumps({"access_token": self.page_access_token}),
-                                 headers={'Content-type': 'application/json'})
+        async with aiohttp.ClientSession(connector=tcpconnector) as client:
+            r = await client.get(
+                "https://graph.facebook.com/v2.6/%s?access_token=%s" % (fb_user_id, self.page_access_token,),
+                data=json.dumps({"access_token": self.page_access_token}),
+                headers={'Content-type': 'application/json'})
             text = await r.text()
             if r.status != requests.codes.ok:
                 print(f'Error in status {text}')
@@ -459,13 +460,11 @@ class Page(object):
 
 
 class PageAsync(object):
-    def __init__(self, page_access_token, loop=False, **options):
+    def __init__(self, page_access_token, **options):
         self.page_access_token = page_access_token
         self._after_send = options.pop('after_send', None)
         self._page_id = None
         self._page_name = None
-        if loop!=None:
-            self._loop = loop
 
         # webhook_handlers contains optin, message, echo, delivery, postback, read, account_linking.
         # these are only set by decorators
@@ -547,7 +546,7 @@ class PageAsync(object):
 
     async def _fetch_page_info(self):
         tcpconnector = aiohttp.TCPConnector(family=socket.AF_INET, verify_ssl=False)
-        async with aiohttp.ClientSession(loop=self._loop, connector=tcpconnector) as client:
+        async with aiohttp.ClientSession(connector=tcpconnector) as client:
             r = await client.get("https://graph.facebook.com/v2.6/me",
                                  data=json.dumps({"access_token": self.page_access_token}),
                                  headers={'Content-type': 'application/json'})
@@ -565,13 +564,14 @@ class PageAsync(object):
 
     async def get_user_profile(self, fb_user_id):
         tcpconnector = aiohttp.TCPConnector(family=socket.AF_INET, verify_ssl=False)
-        async with aiohttp.ClientSession(loop=self._loop, connector=tcpconnector) as client:
-            r = await client.get("https://graph.facebook.com/v2.6/%s?access_token=%s" % (fb_user_id, self.page_access_token, ),
-                                 data=json.dumps({"access_token": self.page_access_token}),
-                                 headers={'Content-type': 'application/json'})
+        async with aiohttp.ClientSession(connector=tcpconnector) as client:
+            r = await client.get(
+                "https://graph.facebook.com/v2.6/%s?access_token=%s" % (fb_user_id, self.page_access_token,),
+                data=json.dumps({"access_token": self.page_access_token}),
+                headers={'Content-type': 'application/json'})
 
             text = await r.text()
-            
+
             if r.status != requests.codes.ok:
                 print(text)
                 return
@@ -579,8 +579,8 @@ class PageAsync(object):
         return json.loads(text)
 
     async def _send(self, payload, callback=None):
-        tcpconnector = aiohttp.TCPConnector(family=socket.AF_INET, verify_ssl=False)
-        async with aiohttp.ClientSession(loop=self._loop, connector=tcpconnector) as client:
+        tcpconnector = aiohttp.TCPConnector(family=socket.AF_INET, ssl=False)
+        async with aiohttp.ClientSession(connector=tcpconnector) as client:
             r = await client.post("https://graph.facebook.com/v2.6/me/messages",
                                   params={"access_token": self.page_access_token},
                                   data=payload.to_json(),
@@ -643,7 +643,7 @@ class PageAsync(object):
 
     async def _send_thread_settings(self, data):
         tcpconnector = aiohttp.TCPConnector(family=socket.AF_INET, verify_ssl=False)
-        async with aiohttp.ClientSession(loop=self._loop, connector=tcpconnector) as client:
+        async with aiohttp.ClientSession(connector=tcpconnector) as client:
             r = await client.post("https://graph.facebook.com/v2.6/me/thread_settings",
                                   data=data,
                                   headers={'Content-type': 'application/json'})
